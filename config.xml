@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+	<csound>
+		<var name="sampleRate">
+			<val value="48000" valueType="string"/>
+			<setting description="Sample Rate." dialogEntry="True" displayName="Sample Rate" group="Instrument Header" notNull="True" update="False"/>
+		</var>
+		<var name="kontrolRate">
+			<val value="6000" valueType="string"/>
+			<setting description="Control Rate" dialogEntry="True" displayName="Control Rate" group="Instrument Header" notNull="True" update="False"/>
+		</var>
+		<var name="ksmps">
+			<val value="8" valueType="string"/>
+			<setting description="Number of samples in a control period (Should be [Sample Rate] / [Control Rate]!)" dialogEntry="True" displayName="KSMPS" group="Instrument Header" notNull="True" update="False"/>
+		</var>
+		<var name="nchnls">
+			<val value="1" valueType="string"/>
+			<setting description="Number of channels of audio output." dialogEntry="True" displayName="Channels" group="Instrument Header" notNull="True" update="False"/>
+		</var>
+		<var name="score">
+			<val valueType="string">f0 6000</val>
+			<setting description="Csound score." dialogEntry="True" displayName="Score" group="None" height="5" notNull="True" update="False"/>
+		</var>
+		<var name="Csoundpath">
+			<val value="C:\Program Files (x86)\Csound6\bin\csound.exe" valueType="string"/>
+			<setting chooser="file" description="Path to csound binary file." dialogEntry="True" displayName="Csound path" group="Csound Preferences" notNull="True" update="False"/>
+		</var>
+		<var name="params">
+			<val value="-d -b256 -B2048 -W -+rtmidi=mme -+rtaudio=mme -o dac -M0 -m0" valueType="string"/>
+			<setting description="Start Parameters (Flags) for Csound" dialogEntry="True" displayName="Csound Parameters" group="Csound Preferences" hint="pref_csoundparams" notNull="True" update="False"/>
+		</var>
+		<var name="autoplay">
+			<val value="True" valueType="boolean"/>
+			<setting description="Automatically restart csound when workspace changed?" dialogEntry="True" displayName="Autoplay" group="None" notNull="True" update="False" updateFunc="_updateAutoplayCb"/>
+		</var>
+		<var name="feedbacktimeout">
+			<val value="150" valueType="int"/>
+			<setting description="Timeout (in milliseconds) for success- feedback of the csound compilation process" dialogEntry="True" displayName="Compilation Feedback Timeout" group="Csound Preferences" hint="pref_csoundcompilationtimeout" notNull="True" update="False"/>
+		</var>
+	</csound>
+	<directories>
+		<var name="RecentFiles" valueType="list-3">
+			<var name="index-0">
+				<val value="F:\src\music\cabel-0.85\examples\02_midinotein.cw" valueType="string"/>
+			</var>
+			<var name="index-1">
+				<val value="F:\src\music\cabel-0.85\examples\01_saw_amp_monoout.cw" valueType="string"/>
+			</var>
+			<var name="index-2">
+				<val value="F:\src\music\cabel-0.85\examples\sweep_strings.cw" valueType="string"/>
+			</var>
+			<setting description="Recently loaded CabelWorkspace files." dialogEntry="False" displayName="Recent Files" group="None" notNull="True" update="False"/>
+		</var>
+		<var name="Modules">
+			<val value="F:\src\music\cabel-0.85\modules" valueType="string"/>
+			<setting chooser="path" description="Path to the Xml Modules" dialogEntry="True" displayName="Module Path" group="None" notNull="False" update="False" updateFunc="_refreshModulesMenu"/>
+		</var>
+		<var name="LogfilesPath">
+			<val value="log" valueType="string"/>
+			<setting chooser="path" description="Path to the Logging Files" dialogEntry="True" displayName="Logfiles" group="Logging" notNull="False" update="False" updateFunc="_updateLogging"/>
+		</var>
+		<var name="Logging">
+			<val value="True" valueType="boolean"/>
+			<setting description="Write Log Messages in Logfiles?" dialogEntry="True" displayName="Logging on?" group="Logging" notNull="True" update="False" updateFunc="_updateLogging"/>
+		</var>
+		<var name="Editor">
+			<val value="" valueType="string"/>
+			<setting chooser="file" description="The Editor to start from within Cabel" dialogEntry="True" displayName="Editor" group="None" notNull="False" update="False"/>
+		</var>
+	</directories>
+	<view>
+		<var name="BackgroundColour">
+			<val value="(80, 55, 0)" valueType="colour"/>
+			<setting description="Colour of Workspace Background" dialogEntry="True" displayName="Workspace Colour" group="Workspace" notNull="True" update="False" updateFunc="dummy"/>
+		</var>
+		<var name="WorkspaceWidth">
+			<val value="3000" valueType="int"/>
+			<setting description="Width of the Workspace (Scroll-area)" dialogEntry="True" displayName="Workspace Width" group="Workspace" notNull="True" update="False" updateFunc="dummy"/>
+		</var>
+		<var name="WorkspaceHeight">
+			<val value="3000" valueType="int"/>
+			<setting description="Height of the Workspace (Scroll-area)" dialogEntry="True" displayName="Workspace Height" group="Workspace" notNull="True" update="False" updateFunc="dummy"/>
+		</var>
+		<var name="FrameWidth">
+			<val value="1296" valueType="int"/>
+			<setting description="Width of the Cabel Application Window" dialogEntry="False" displayName="Window Width" group="None" notNull="True" update="False"/>
+		</var>
+		<var name="FrameHeight">
+			<val value="786" valueType="int"/>
+			<setting description="Height of the Cabel Application Window" dialogEntry="False" displayName="Window Height" group="None" notNull="True" update="False"/>
+		</var>
+		<var name="FullModuleNames">
+			<val value="False" valueType="boolean"/>
+			<setting description="Show full module names (including pathnames)?" dialogEntry="True" displayName="Full Module Names" group="None" notNull="True" update="False" updateFunc="dummy"/>
+		</var>
+		<var name="ModuleDeleteWarning">
+			<val value="True" valueType="boolean"/>
+			<setting description="Warn before removing modules from workspace?" dialogEntry="True" displayName="Warning on Removing Modules" group="None" notNull="True" update="False"/>
+		</var>
+		<var name="CableColour">
+			<val value="(0, 150, 0)" valueType="colour"/>
+			<setting description="Basic colour of Connection Cables" dialogEntry="True" displayName="Cable Colour" group="Cable Connection" notNull="True" update="False" updateFunc="dummy"/>
+		</var>
+		<var name="ShowBottomWindow">
+			<val value="False" valueType="boolean"/>
+			<setting description="Show the bottom pane?" dialogEntry="False" displayName="Show Bottom Pane" group="None" notNull="True" update="False"/>
+		</var>
+		<var name="RememberBottomWindowProperties">
+			<val value="True" valueType="boolean"/>
+			<setting description="Remember properties of the bottom pane?" dialogEntry="True" displayName="Save Bottom Pane Settings" group="None" notNull="True" update="False"/>
+		</var>
+		<var name="ActiveBottomPage">
+			<val value="0" valueType="enum-string"/>
+			<enum name="ActiveBottomPage" valueType="list-2">
+				<var name="index-0">
+					<val value="Python Shell" valueType="string"/>
+				</var>
+				<var name="index-1">
+					<val value="Messages" valueType="string"/>
+				</var>
+			</enum>
+			<setting description="Active Page of the Bottom Pane" dialogEntry="False" displayName="Active Bottom Pane Page" group="None" notNull="True" update="False"/>
+		</var>
+		<var name="HeightBottomWindow">
+			<val value="100" valueType="int"/>
+			<setting description="Height of the bottom pane" dialogEntry="False" displayName="Bottom Pane Height" group="None" notNull="True" update="False"/>
+		</var>
+		<var name="CableSagging">
+			<val value="30" valueType="int"/>
+			<setting description="Sagging of Connection Cables" dialogEntry="True" displayName="Cable Sagging" group="Cable Connection" notNull="True" update="False" updateFunc="dummy"/>
+		</var>
+		<var name="ModuleZoomEnabled">
+			<val value="False" valueType="boolean"/>
+			<setting description="Enable individual zooming of Modules?" dialogEntry="True" displayName="Module Zoom Enabled" group="Zoom" notNull="True" update="False"/>
+		</var>
+		<var name="ZoomDefFactor">
+			<val value="25.0" valueType="float"/>
+			<setting description="Zoom Factor for standard step zooms" dialogEntry="True" displayName="Default Zoom Factor" group="Zoom" notNull="True" update="False"/>
+		</var>
+		<var name="FrameMaximized">
+			<val value="True" valueType="boolean"/>
+			<setting description="Frame maximized?" dialogEntry="False" displayName="Frame Maximized?" group="None" notNull="True" update="False"/>
+		</var>
+		<var name="ZoomValue">
+			<val value="100" valueType="int"/>
+			<setting description="Zoom Value" dialogEntry="False" displayName="Zoom Value" group="None" notNull="True" update="False"/>
+		</var>
+	</view>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</config>
+
